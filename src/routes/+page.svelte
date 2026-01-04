@@ -7,8 +7,74 @@
 	let width = $derived(windowWidth * 0.8);
 	let height = $derived(windowHeight * 0.8);
 
+	const numberOfWalkers = 10;
+
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D | null;
+
+	class Walker {
+			x: number;
+			y: number;
+			r: number;
+			velocity: number;
+			size: number;
+			hue: number;
+			color: string;
+			constructor(size:number) {
+				this.size = size
+				this.r = Math.random();
+				this.x = Math.random() * width - this.size;
+				this.y = Math.random() * height - this.size;
+				this.velocity = 50;
+				this.hue = this.r * 360;
+				this.color = `hsl${this.hue},90%,50%`;
+			}
+			show(delta: number) {
+				const randNum = Math.floor(Math.random() * 4);
+				const speed = (this.size * this.velocity) * delta;
+				ctx.fillStyle = `hsl(${this.hue},90%,50%)`;
+				ctx.fillRect(this.x, this.y, this.size, this.size);
+				this.setDirection(randNum, speed);
+				this.x = Math.max(this.size, Math.min(width - this.size, this.x));
+				this.y = Math.max(this.size, Math.min(height - this.size, this.y));
+			}
+
+			setDirection(randNum: number, speed: number) {
+				switch (randNum) {
+					case 0:
+						this.x = this.x + speed;
+						break;
+					case 1:
+						this.x = this.x - speed;
+						break;
+					case 2:
+						this.y = this.y + speed;
+						break;
+					case 3:
+						this.y = this.y - speed;
+						break;
+				}
+			}
+
+			checkBounds() {
+				//check left border
+				if (this.x + this.size <= 0) {
+					this.x = 0 + this.size;
+				}
+				//check right border
+				if (this.x - this.size >= width) {
+					this.x = width - this.size;
+				}
+				//check top
+				if (this.y + this.size <= 0) {
+					this.y = 0 + this.size;
+				}
+				//check bottom
+				if (this.y >= height - this.size) {
+					this.y = height - this.size;
+				}
+			}
+		}
 
 	onMount(() => {
 		//get window dimensions
@@ -22,31 +88,21 @@
 		let lastTime = performance.now();
 
 		// svelte-ignore perf_avoid_nested_class
-		class Walker {
-			x: number;
-			y: number;
-			xv: number;
-			xy: number;
-			constructor() {
-				this.x = width / 2;
-				this.y = height / 2;
-				this.xv = 100;
-				this.xy = 80;
-			}
-			show(delta:number) {
-				ctx.fillStyle = 'white';
-				ctx.fillRect(this.x, this.y, 2, 2);
-				walker.x = walker.x + walker.xv * delta;
-			}
-		}
+		
 
-		let walker = new Walker();
+		let walkers = [];
+		for (let index = 0; index < numberOfWalkers; index++) {
+			walkers.push(new Walker(Math.min(Math.random()*4,2)));
+		}
 
 		function draw(time: number) {
 			const delta = (time - lastTime) / 1000;
 			lastTime = time;
+			// ctx?.clearRect(0, 0, width, height);
 
-			walker.show(delta);
+			for (const walker of walkers) {
+				walker.show(delta);
+			}
 
 			requestAnimationFrame(draw);
 		}
@@ -56,7 +112,6 @@
 
 	$effect(() => {
 		if (!canvas) return;
-
 		canvas.width = width;
 		canvas.height = height;
 	});
