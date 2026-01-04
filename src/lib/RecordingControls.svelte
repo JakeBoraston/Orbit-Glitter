@@ -133,7 +133,7 @@
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = `walker-animation-${Date.now()}.${mimeType.includes('mp4') ? 'mp4' : 'webm'}`;
+		a.download = `orbit-glitter-${Date.now()}.${mimeType.includes('mp4') ? 'mp4' : 'webm'}`;
 		a.click();
 		URL.revokeObjectURL(url);
 	}

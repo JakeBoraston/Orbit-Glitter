@@ -1,38 +1,77 @@
-# sv
+# Orbit Glitter
+(README created by Claude Code)
+A mesmerizing canvas-based animation featuring orbital particle glitter effects. Built with SvelteKit and Svelte 5.
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+![Orbit Glitter Demo](https://via.placeholder.com/800x400/0a0910/8B7FA8?text=Orbit+Glitter)
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- 🎨 **Real-time controls** - Adjust alpha, hue, hue separation, and orbital radius on the fly
+- 🎥 **Video recording** - Record your animations with automatic MP4 conversion
+- ⚡ **60 FPS animation** - Smooth orbital motion with delta time calculation
+- 🌈 **Customizable colors** - HSL-based color system with dynamic hue control
+- 📱 **Responsive** - Canvas scales to 80% of viewport
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Demo
 
-# create a new project in my-app
-npx sv create my-app
+🔗 [**Live Demo**](https://jakeboraston.github.io/Orbit-Glitter/)
+
+## Getting Started
+
+### Prerequisites
+
+- [Bun](https://bun.sh/) (recommended) or Node.js
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/jakeboraston/Orbit-Glitter.git
+cd Orbit-Glitter
+
+# Install dependencies
+bun install
+
+# Start development server
+bun run dev
 ```
 
-## Developing
+Visit `http://localhost:5173` to see the animation.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Usage
 
-```sh
-npm run dev
+### Controls
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+- **Alpha Slider** - Adjust trail fade rate (lower = longer trails)
+- **Hue Separation Slider** - Control color spread between particles
+- **Hue Slider** - Set the base color
+- **Radius Slider** - Adjust orbital radius
+
+### Recording
+
+1. Click "Start Recording" to begin capturing
+2. Animation records for 10 seconds at 60fps
+3. Automatically converts to MP4 (works on iPhone!)
+4. Toggle "Auto-record on load" to start recording on page load
+
+## Technology Stack
+
+- **SvelteKit 2** with Svelte 5 (runes API)
+- **TypeScript** (strict mode)
+- **Vite 7**
+- **FFmpeg.wasm** for WebM → MP4 conversion
+- **MediaRecorder API** for canvas recording
+
+## Building for Production
+
+```bash
+bun run build
 ```
 
-## Building
+## License
 
-To create a production version of your app:
+MIT
 
-```sh
-npm run build
-```
+## Author
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Jake
