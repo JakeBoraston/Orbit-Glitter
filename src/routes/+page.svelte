@@ -1,14 +1,24 @@
 <script lang="ts">
-	let height = $state();
-	let width = $state();
+	import { onMount } from 'svelte';
+	
+	let canvas:HTMLCanvasElement;
+	let ctx:CanvasRenderingContext2D|null;
+	
+	let height = $state<number>();
+	let width = $state<number>();
+
+	onMount(() => {
+		const context = canvas.getContext("2d")
+		ctx = context;
+	});
 </script>
 
 <main bind:clientHeight={height} bind:clientWidth={width}>
-
+	<canvas bind:this={canvas} id="canvas1"></canvas>
 </main>
 
 <style>
-	main{
+	main {
 		height: 85%;
 		width: 85%;
 		background-color: #010101;
