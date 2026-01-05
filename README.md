@@ -1,8 +1,6 @@
 # Orbit Glitter
 (README created by Claude Code)
-A mesmerizing canvas-based animation featuring orbital particle glitter effects. Built with SvelteKit and Svelte 5.
-
-![Orbit Glitter Demo](https://via.placeholder.com/800x400/0a0910/8B7FA8?text=Orbit+Glitter)
+A mesmerizing canvas-based animation featuring orbital particle glitter effects. Built with SvelteKit and Svelte 5
 
 ## Features
 
